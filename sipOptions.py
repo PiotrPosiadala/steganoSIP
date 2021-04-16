@@ -3,6 +3,11 @@ import argparse
 import secrets as s
 import time
 
+'''
+sipOptions
+Simple SIP agent sending SIP Options messages 
+containing or not coverted informations
+'''
 
 def sip_options():
     '''

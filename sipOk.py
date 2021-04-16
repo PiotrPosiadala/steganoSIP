@@ -2,6 +2,12 @@ from scapy.all import *
 import argparse
 import secrets as s
 
+'''
+sipOk
+Simple SIP agent sniffing for SIP Options messages 
+and replaying with SIP 200 OK message
+'''
+
 def get_call_id(sip):
     call_id_index = sip.find(b'Call-I') + 9
     call_id_end_index = sip.find(b'@', call_id_index)
