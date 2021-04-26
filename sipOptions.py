@@ -69,7 +69,7 @@ def go_go_sip(args):
         else:
             pkt = IP(src=src_ip, dst=dst_ip) / UDP(sport=src_port, dport=dst_port) / sip_options()
         send(pkt)
-        time.sleep(0.5)
+        time.sleep(1)
 
     file.close()
 
