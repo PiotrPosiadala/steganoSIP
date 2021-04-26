@@ -12,7 +12,7 @@ def sip_options():
     '''
     SIP Options message without covert channel
     '''
-    rand_list = [22, 25 ,28]
+    rand_list = [22, 25, 28]
     return (
         'OPTIONS sip:terminal01121605@pw.edu.pl;transport=udp SIP/2.0\r\n'
         'Via: SIP/2.0/UDP sbcwaw1@pw.edu.pl;branch={0}\r\n'
@@ -21,7 +21,7 @@ def sip_options():
         'Call-ID: {2}@pw.edu.pl\r\n'
         'CSeq: {3} OPTIONS\r\n'
         'Max-Forwards: 70\r\n'
-        'Call-Info: Please, let me know about your avability\r\n'
+        'Call-Info: Please, let me know about your avability.\r\n'
         'Organization: Warsaw University of Technology, Faculty of Electronics and Information Technology \r\n'
         'Content-Length: 0\r\n\r\n').format('z9hG4bK' + s.token_urlsafe(5), s.token_urlsafe(8), s.token_urlsafe(24),
                                             s.randbits(random.choice(rand_list)))

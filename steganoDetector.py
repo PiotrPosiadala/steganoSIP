@@ -9,9 +9,12 @@ information in SIP Options message
 '''
 
 
-def stegano_checker(sip_options):
-    #TODO
-    stegano = True
+def stegano_checker(sip):
+    call_info_index = sip.find(b'Call-Info:') + 51
+    call_info = sip[call_info_index:call_info_index+1]
+    call_info = call_info.decode('UTF-8')
+    if call_info == ".":
+        stegano = True
     return stegano
 
 
@@ -38,4 +41,3 @@ for pkt in pkts:
 
     except:
         pass
-
