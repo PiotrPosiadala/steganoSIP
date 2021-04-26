@@ -77,11 +77,9 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--dst", default="192.168.0.11", help="The destination IP")
     parser.add_argument("-s", "--src", default="192.168.0.11", help="The source IP")
-    parser.add_argument("-c", "--covert", action="store_true", default=False,
+    parser.add_argument("-c", "--covert", action="store_true", default=True,
                         help="Generating SIP Options with hidden info (covert channel)")
     parser.add_argument("-f", "--file", default="message.txt", help="File to hide in covert channel")
-    parser.add_argument("-p", "--percent", default=20,
-                        help="Hidden length of file (in percents) after which we make a pause")
     parser.parse_args()
     args = parser.parse_args()
 
