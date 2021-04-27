@@ -57,11 +57,12 @@ def parse_sip_options(pkt):
             via_branch = get_via_branch(sip_options)  # get branch and call id from received sip options message
             call_id = get_call_id(sip_options)
 
-            msg = via_branch + call_id
-            if len(msg) % 4 != 0:
-                test = msg + ("=" * (4 - (len(msg) % 4)))
-            # msg = base64.urlsafe_b64decode(msg)
-            write_file.write((base64.urlsafe_b64decode(msg).decode('utf-8')))
+            if covert:
+                msg = via_branch + call_id
+                # if len(msg) % 4 != 0:
+                #     test = msg + ("=" * (4 - (len(msg) % 4)))
+                # msg = base64.urlsafe_b64decode(msg)
+                write_file.write((base64.urlsafe_b64decode(msg).decode('utf-8')))
 
             pkt = IP(src=src_ip, dst=dst_ip) / UDP(sport=src_port, dport=dst_port) / sip_ok(via_branch, call_id)
             pkt.show()
@@ -83,5 +84,6 @@ parser.parse_args()
 args = parser.parse_args()
 
 interface = args.interface
+covert = args.covert
 write_file = open("received_msg.txt", "a")
 sniff(filter="udp", prn=parse_sip_options)

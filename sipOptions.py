@@ -49,25 +49,24 @@ def go_go_sip(args):
     covert = args.covert
     file_name = args.file
     src_port, dst_port = 5060, 5061  # 5060 is default SIP port
-
     file = open(file_name, "r")
     data = file.read()
 
     for i in range(0, len(data), 20):
-        msg = base64.urlsafe_b64encode(bytes(data[i:i + 20], 'utf-8'))
+        msg = base64.b64encode(bytes(data[i:i + 20], 'utf-8'))
         msg = msg.decode('utf-8')
 
-        if msg[-2:] == "==":
-            msg = msg[0:-2]
-        elif msg[-1:] == "=":
-            msg = msg[0:-1]
+        # if msg[-2:] == "==":
+        #     msg = msg[0:-2]
+        # elif msg[-1:] == "=":
+        #     msg = msg[0:-1]
 
         if covert:
             pkt = IP(src=src_ip, dst=dst_ip) / UDP(sport=src_port, dport=dst_port) / stegano_sip_options(msg)
         else:
             pkt = IP(src=src_ip, dst=dst_ip) / UDP(sport=src_port, dport=dst_port) / sip_options()
         send(pkt)
-        time.sleep(1)
+        time.sleep(0.2)
 
     file.close()
 
