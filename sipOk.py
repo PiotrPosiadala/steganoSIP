@@ -58,7 +58,9 @@ def parse_sip_options(pkt):
             call_id = get_call_id(sip_options)
 
             msg = via_branch + call_id
-            msg = base64.urlsafe_b64decode(msg)
+            if len(msg) % 4 != 0:
+                test = msg + ("=" * (4 - (len(msg) % 4)))
+            # msg = base64.urlsafe_b64decode(msg)
             write_file.write((base64.urlsafe_b64decode(msg).decode('utf-8')))
 
             pkt = IP(src=src_ip, dst=dst_ip) / UDP(sport=src_port, dport=dst_port) / sip_ok(via_branch, call_id)
