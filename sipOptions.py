@@ -23,7 +23,7 @@ def sip_options():
         'Max-Forwards: 70\r\n'
         'Call-Info: Please, let me know about your avability.\r\n'
         'Organization: Warsaw University of Technology, Faculty of Electronics and Information Technology \r\n'
-        'Content-Length: 0\r\n\r\n').format('z9hG4bK' + s.token_urlsafe(5), s.token_urlsafe(8), s.token_urlsafe(random.choice(rand_list)), s.token_urlsafe(8))
+        'Content-Length: 0\r\n\r\n').format('z9hG4bK' + s.token_urlsafe(5), s.token_urlsafe(8), s.token_urlsafe(random.choice(rand_list)), s.randbits(16))
 
 
 def stegano_sip_options(msg):
@@ -40,7 +40,7 @@ def stegano_sip_options(msg):
         'Max-Forwards: 70\r\n'
         'Call-Info: Please, let me know about your availability\r\n'
         'Organization: Warsaw University of Technology, Faculty of Electronics and Information Technology \r\n'
-        'Content-Length: 0\r\n\r\n').format('z9hG4bK' + msg[:5], s.token_urlsafe(8), msg[5:], s.token_urlsafe(8))
+        'Content-Length: 0\r\n\r\n').format('z9hG4bK' + msg[:5], s.token_urlsafe(8), msg[5:], s.randbits(16))
 
 
 def go_go_sip(args):
