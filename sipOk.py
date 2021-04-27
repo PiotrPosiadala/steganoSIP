@@ -82,5 +82,4 @@ args = parser.parse_args()
 
 interface = args.interface
 write_file = open("received_msg.txt", "a")
-while 1:
-    sniff(filter="udp", prn=parse_sip_options)
+sniff(filter="udp", prn=parse_sip_options)
