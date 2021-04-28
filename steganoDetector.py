@@ -1,5 +1,6 @@
 from scapy.all import *
 import argparse
+import traceback
 
 '''
 steganoDetector
@@ -14,6 +15,8 @@ def stegano_checker(sip):
     call_info = sip[call_info_index:call_info_index+1]
     call_info = call_info.decode('UTF-8')
     if call_info == ".":
+        stegano = False
+    else:
         stegano = True
     return stegano
 
@@ -27,17 +30,26 @@ file = args.file
 
 pkts = sniff(offline=file)
 
-for pkt in pkts:
-    try:
-        if pkt[0][2].load[:7] == b'OPTIONS':
-            sip_options = pkt[0][2].load
-            # print(sip_options)
-            stegano = stegano_checker(sip_options)    
-            
-            if stegano:
-                print("This pcap file contains coverted information")
-            else:
-                print("This pcap file does not contain coverted information")
 
-    except:
-        pass
+def main():
+    for pkt in pkts:
+        try:
+            if pkt[0][2].load[:7] == b'OPTIONS':
+                sip_options = pkt[0][2].load
+                # print(sip_options)
+                stegano = stegano_checker(sip_options)
+            
+                if stegano:
+                    print("This pcap file contains coverted information")
+                    return
+                else:
+                    print("This pcap file does not contain coverted information")
+                    return
+
+        except:
+            pass
+        # traceback.print_exc()
+
+
+if __name__ == '__main__':
+    main()
