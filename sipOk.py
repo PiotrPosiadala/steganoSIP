@@ -78,7 +78,7 @@ def parse_sip_options(pkt):
 
 parser = argparse.ArgumentParser()
 parser.add_argument("-i", "--interface", default=None, help="Interface name for sniffer")
-parser.add_argument("-c", "--covert", action="store_true", default=True,
+parser.add_argument("-c", "--covert", action="store_true", default=False,
                         help="Generating SIP Options with hidden info (covert channel)")
 parser.parse_args()
 args = parser.parse_args()

@@ -48,7 +48,7 @@ def go_go_sip(args):
     src_ip = args.src
     covert = args.covert
     file_name = args.file
-    src_port, dst_port = 5060, 5061  # 5060 is default SIP port
+    src_port, dst_port = 5060, 5060  # 5060 is default SIP port
     file = open(file_name, "r")
     data = file.read()
 
@@ -66,7 +66,7 @@ def go_go_sip(args):
         else:
             pkt = IP(src=src_ip, dst=dst_ip) / UDP(sport=src_port, dport=dst_port) / sip_options()
         send(pkt)
-        time.sleep(0.2)
+        time.sleep(0.4)
 
     file.close()
 
@@ -75,7 +75,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("-d", "--dst", default="192.168.0.11", help="The destination IP")
     parser.add_argument("-s", "--src", default="192.168.0.11", help="The source IP")
-    parser.add_argument("-c", "--covert", action="store_true", default=True,
+    parser.add_argument("-c", "--covert", action="store_true", default=False,
                         help="Generating SIP Options with hidden info (covert channel)")
     parser.add_argument("-f", "--file", default="message.txt", help="File to hide in covert channel")
     parser.parse_args()
